@@ -5,8 +5,9 @@ import react from "@vitejs/plugin-react";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   root: path.resolve(root, "client"),
+  define: { __EXHIBITION_MODE__: JSON.stringify(mode === "exhibition") },
   plugins: [react()],
   resolve: {
     // R3F, the procedural fish, and the model preview must share one Three.js
@@ -25,4 +26,5 @@ export default defineConfig({
     outDir: path.resolve(root, "dist/client"),
     emptyOutDir: true,
   },
-});
+}));
+
